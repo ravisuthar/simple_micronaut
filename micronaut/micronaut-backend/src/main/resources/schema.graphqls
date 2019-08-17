@@ -1,4 +1,11 @@
 type Query {
-
     hello(name: String): String!
+    user:user
+}
+
+
+type user{
+	id:string
+	name:string
+	email:string
 }

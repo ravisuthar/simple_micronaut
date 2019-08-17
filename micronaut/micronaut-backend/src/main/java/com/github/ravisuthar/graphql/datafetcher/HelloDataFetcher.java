@@ -1,4 +1,4 @@
-package com.github.ravisuthar.graphql;
+package com.github.ravisuthar.graphql.datafetcher;
 import graphql.schema.DataFetcher;
 import graphql.schema.DataFetchingEnvironment;
 
