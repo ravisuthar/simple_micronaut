@@ -1,0 +1,17 @@
+micronaut:
+  application:
+    #name: myapplication
+
+
+  server:
+    port: 8888
+    cors:
+      enabled: true
+
+graphql:
+  enabled: true
+  graphiql:
+    enabled: true
+    path: /graphiql
+    template-path: classpath:graphiql/index.html
+    page-title: GraphiQL
