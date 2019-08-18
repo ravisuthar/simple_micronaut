@@ -8,6 +8,7 @@ import io.micronaut.http.annotation.Get;
 import io.micronaut.http.annotation.PathVariable;
 import io.micronaut.http.annotation.Post;
 import io.micronaut.http.annotation.Put;
+import io.micronaut.validation.Validated;
 import io.reactivex.Single;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -18,6 +19,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,6 +29,7 @@ import com.github.ravisuthar.model.User;
 
 
 @Controller("/user")
+@Validated
 public class UserController {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
@@ -52,12 +56,12 @@ public class UserController {
 	
 	
 	@Post(value="/user", consumes=MediaType.APPLICATION_JSON)
-	public void add(@Body User user){
+	public void add(@Body @Valid User user){
 		LOGGER.info("added ");
 	}
 	
 	@Put(value="/user/{id}", consumes=MediaType.APPLICATION_JSON)
-	public void update(@Body User user, @PathVariable String id){
+	public void update(@Body @Valid User user, @PathVariable String id){
 		LOGGER.info("updated ");
 	}
 	

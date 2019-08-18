@@ -1,9 +1,18 @@
 package com.github.ravisuthar.model;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+
 public class User {
 
+	@NotBlank
 	private String id;
+	
+	@NotBlank
 	private String name;
+	
+	@NotBlank
+	@Email
 	private String email;
 
 	public User() {

@@ -113,12 +113,14 @@
 			<artifactId>micronaut-graphql</artifactId>
 		</dependency>
 		<dependency>
-
-      <groupId>io.micronaut</groupId>
-
-      <artifactId>micronaut-views</artifactId>
-
-    </dependency>
+			<groupId>io.micronaut</groupId>
+			<artifactId>micronaut-views</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>io.micronaut.configuration</groupId>
+			<artifactId>micronaut-hibernate-validator</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>

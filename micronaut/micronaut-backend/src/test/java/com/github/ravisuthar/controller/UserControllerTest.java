@@ -13,6 +13,8 @@ import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.github.ravisuthar.model.User;
+
 @MicronautTest
 public class UserControllerTest {
 
@@ -25,8 +27,8 @@ public class UserControllerTest {
     @Client("/user")
     private RxHttpClient client; 
 
-    /*@Inject
-    private UserControllerClient userControllerClient;*/
+    @Inject
+    private UserControllerClient userControllerClient;
 
     @Test
     void getAll_test() {
@@ -36,6 +38,13 @@ public class UserControllerTest {
         Assertions.assertNotNull(response);
         Assertions.assertEquals("[{\"id\":\"1\",\"name\":\"ABC\",\"email\":\"abc@abc.abc\"},{\"id\":\"2\",\"name\":\"xyz\",\"email\":\"xyz@xyz.xyz\"}]", response); //) 
     }
+    
+    /*@Test
+    public void addUser(){
+    	
+         this.userControllerClient.add(new User()));
+         
+    }*/
     
     /*@Test
     public void testHelloWorldResponse() {
