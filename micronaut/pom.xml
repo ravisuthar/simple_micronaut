@@ -13,14 +13,17 @@
 	</modules>
 
 	<properties>
-		<exec.mainClass>Application</exec.mainClass>
+		<exec.mainClass>com.github.ravisuthar.Application</exec.mainClass>
 		<micronaut.version>1.2.0</micronaut.version>
 		<jdk.version>1.8</jdk.version>
-
+		<maven.compiler.target>${jdk.version}</maven.compiler.target>
+		<maven.compiler.source>${jdk.version}</maven.compiler.source>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>${maven.compiler.source}</maven.compiler.target>
-
+		<maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
+		<maven-failsafe-plugin.version>2.22.2</maven-failsafe-plugin.version>
 	</properties>
 
 	<repositories>
@@ -29,9 +32,6 @@
 			<url>https://jcenter.bintray.com</url>
 		</repository>
 	</repositories>
-
-
-
 
 	<dependencyManagement>
 		<dependencies>
@@ -44,6 +44,9 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
+
+
+
 	<dependencies>
 		<dependency>
 			<groupId>io.micronaut</groupId>
@@ -101,54 +104,146 @@
 			<artifactId>micronaut-test-junit5</artifactId>
 			<scope>test</scope>
 		</dependency>
-
-
-
-
-		<!-- https://mvnrepository.com/artifact/io.micronaut.graphql/micronaut-graphql -->
+		<dependency>
+			<groupId>io.micronaut</groupId>
+			<artifactId>micronaut-management</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>io.micronaut.graphql</groupId>
 			<artifactId>micronaut-graphql</artifactId>
 		</dependency>
+		<dependency>
 
+      <groupId>io.micronaut</groupId>
+
+      <artifactId>micronaut-views</artifactId>
+
+    </dependency>
 	</dependencies>
 
 	<build>
 		<plugins>
-			<!--<plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-shade-plugin</artifactId> 
-				<version>3.1.0</version> <executions> <execution> <phase>package</phase> 
-				<goals> <goal>shade</goal> </goals> <configuration> <transformers> <transformer 
-				implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer"> 
-				<mainClass>${exec.mainClass}</mainClass> </transformer> <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/> 
-				</transformers> </configuration> </execution> </executions> </plugin> -->
-			<!-- <plugin> <groupId>org.codehaus.mojo</groupId> <artifactId>exec-maven-plugin</artifactId> 
-				<version>1.6.0</version> <configuration> <executable>java</executable> <arguments> 
-				<argument>-classpath</argument> <classpath/> <argument>${exec.mainClass}</argument> 
-				</arguments> </configuration> </plugin> -->
-
-			<!-- JUnit 5 requires Surefire version 2.22.0 or higher -->
 			<plugin>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.22.0</version>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-shade-plugin</artifactId>
+				<version>3.1.0</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+						<configuration>
+							<transformers>
+								<transformer
+									implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+									<mainClass>${exec.mainClass}</mainClass>
+								</transformer>
+								<transformer
+									implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
+							</transformers>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
-
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>1.6.0</version>
+				<configuration>
+					<executable>java</executable>
+					<arguments>
+						<argument>-classpath</argument>
+						<classpath />
+						<argument>-noverify</argument>
+						<argument>-XX:TieredStopAtLevel=1</argument>
+						<argument>-Dcom.sun.management.jmxremote</argument>
+						<argument>${exec.mainClass}</argument>
+					</arguments>
+				</configuration>
+			</plugin>
 		</plugins>
 		<pluginManagement>
 			<plugins>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-compiler-plugin</artifactId>
-					<version>3.8.0</version>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>${maven-surefire-plugin.version}</version>
 					<configuration>
-						<source>${jdk.version}</source>
-						<target>${jdk.version}</target>
-						<!-- <compilerArgs> <arg>-parameters</arg> </compilerArgs> <annotationProcessorPaths> 
-							<path> <groupId>io.micronaut</groupId> <artifactId>inject-java</artifactId> 
-							<version>${micronaut.version}</version> </path> </annotationProcessorPaths> -->
+						<detail>true</detail>
+						<includes>
+							<include>%regex[.*]</include>
+						</includes>
 					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-failsafe-plugin</artifactId>
+					<version>${maven-failsafe-plugin.version}</version>
+					<executions>
+						<execution>
+							<goals>
+								<goal>integration-test</goal>
+								<goal>verify</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.7.0</version>
+					<configuration>
+						<compilerArgs>
+							<arg>-parameters</arg>
+						</compilerArgs>
+						<annotationProcessorPaths>
+							<path>
+								<groupId>io.micronaut</groupId>
+								<artifactId>micronaut-inject-java</artifactId>
+								<version>${micronaut.version}</version>
+							</path>
+							<path>
+								<groupId>io.micronaut</groupId>
+								<artifactId>micronaut-validation</artifactId>
+								<version>${micronaut.version}</version>
+							</path>
+							<path>
+								<groupId>io.micronaut.configuration</groupId>
+								<artifactId>micronaut-openapi</artifactId>
+								<version>${micronaut.version}</version>
+							</path>
+						</annotationProcessorPaths>
+					</configuration>
+					<executions>
+						<execution>
+							<id>test-compile</id>
+							<goals>
+								<goal>testCompile</goal>
+							</goals>
+							<configuration>
+								<compilerArgs>
+									<arg>-parameters</arg>
+								</compilerArgs>
+								<annotationProcessorPaths>
+									<path>
+										<groupId>io.micronaut</groupId>
+										<artifactId>micronaut-inject-java</artifactId>
+										<version>${micronaut.version}</version>
+									</path>
+									<path>
+										<groupId>io.micronaut</groupId>
+										<artifactId>micronaut-validation</artifactId>
+										<version>${micronaut.version}</version>
+									</path>
+								</annotationProcessorPaths>
+							</configuration>
+						</execution>
+					</executions>
 				</plugin>
 			</plugins>
 		</pluginManagement>
+
 	</build>
 
 

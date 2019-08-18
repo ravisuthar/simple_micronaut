@@ -9,6 +9,11 @@ import io.micronaut.http.annotation.PathVariable;
 import io.micronaut.http.annotation.Post;
 import io.micronaut.http.annotation.Put;
 import io.reactivex.Single;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 import java.util.Arrays;
 import java.util.List;
@@ -25,6 +30,16 @@ public class UserController {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
 	
+	@Operation(summary = "Getting list of Users",
+            description = "A list of users will be retured"
+    )
+    @ApiResponse(
+            content = @Content(mediaType = "application/json",
+                    schema = @Schema(type="string"))
+    )
+    @ApiResponse(responseCode = "400", description = "Invalid Name Supplied")
+    @ApiResponse(responseCode = "404", description = "Users not found")
+    @Tag(name = "greeting")
 	@Get(value="/users", produces=MediaType.APPLICATION_JSON)
 	public Single<List<User>> getAll(){
 		return Single.just(Arrays.asList(new User("1", "ABC", "abc@abc.abc"), new User("2", "xyz", "xyz@xyz.xyz")));

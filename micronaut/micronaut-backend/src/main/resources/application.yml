@@ -1,13 +1,22 @@
 micronaut:
   application:
-    #name: myapplication
-
-
+    name: myapplication
+    instance: ${random.uuid}
+    version: 0.1
   server:
-    port: 8888
+    port: 8080
     cors:
       enabled: true
-
+  router:
+    static-resources:
+         swagger:
+         paths: classpath:META-INF/swagger
+         mapping: swagger/**
+  metrics:
+     enabled: true
+     export:
+         prometheus:
+         enabled: true
 graphql:
   enabled: true
   graphiql:
