@@ -13,6 +13,9 @@ import io.reactivex.Single;
 import java.util.Arrays;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.github.ravisuthar.model.User;
 
 
@@ -20,6 +23,7 @@ import com.github.ravisuthar.model.User;
 @Controller("/user")
 public class UserController {
 
+	private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
 	
 	@Get(value="/users", produces=MediaType.APPLICATION_JSON)
 	public Single<List<User>> getAll(){
@@ -34,17 +38,17 @@ public class UserController {
 	
 	@Post(value="/user", consumes=MediaType.APPLICATION_JSON)
 	public void add(@Body User user){
-		System.out.println("added ");
+		LOGGER.info("added ");
 	}
 	
 	@Put(value="/user/{id}", consumes=MediaType.APPLICATION_JSON)
 	public void update(@Body User user, @PathVariable String id){
-		System.out.println("updated ");
+		LOGGER.info("updated ");
 	}
 	
 	@Delete("/user/{id}")
 	public void delete(@PathVariable String id){
-		System.out.println("deleted ");
+		LOGGER.info("deleted ");
 	}
 	
 
