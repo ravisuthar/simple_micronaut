@@ -1,11 +1,14 @@
+ schema {
+        query: Query
+    }
+
 type Query {
     hello(name: String): String!
-    user:user
+    user: user
 }
 
-
 type user{
-	id:string
-	name:string
-	email:string
+	id: String
+	name: String
+	email: String
 }
