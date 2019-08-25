@@ -1,16 +1,14 @@
 package com.github.ravisuthar.graphql.datafetcher;
-import graphql.schema.DataFetcher;
-import graphql.schema.DataFetchingEnvironment;
-
 import javax.inject.Singleton;
+
+import com.coxautodev.graphql.tools.GraphQLQueryResolver;
 
 
 @Singleton
-public class HelloDataFetcher implements DataFetcher<String> {
+public class HelloDataFetcher implements GraphQLQueryResolver {
 
-    @Override
-    public String get(DataFetchingEnvironment env) {
-        String name = env.getArgument("name");
+    public String get(String evn) {
+        String name = evn;
         if (name == null || name.trim().length() == 0) {
             name = "World";
         }

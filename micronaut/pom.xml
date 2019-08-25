@@ -121,6 +121,14 @@
 			<groupId>io.micronaut.configuration</groupId>
 			<artifactId>micronaut-hibernate-validator</artifactId>
 		</dependency>
+		
+		<dependency>
+  <groupId>com.graphql-java-kickstart</groupId>
+  <artifactId>graphql-java-tools</artifactId>
+  <version>5.4.0</version>
+</dependency>
+
+
 	</dependencies>
 
 	<build>
