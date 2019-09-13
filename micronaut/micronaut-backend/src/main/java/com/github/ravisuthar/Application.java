@@ -8,13 +8,10 @@ import io.swagger.v3.oas.annotations.info.License;
 
 @OpenAPIDefinition(
         info = @Info(
-                title = "Hello World",
-                version = "0.0",
+                title = "swagger-server",
+                version = "0.1",
                 description = "My API",
-                license = @License(name = "Apache 2.0", url = "https://github.com/ravisuthar"),
-                contact = @Contact(url = "https://github.com/ravisuthar", 
-                				  name = "Ravi Suthar", 
-                				  email = "ravisut1@gmail.com")
+                license = @License(name = "Apache 2.0")
         )
 )
 public class Application {
