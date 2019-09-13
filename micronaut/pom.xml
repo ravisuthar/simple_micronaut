@@ -14,7 +14,7 @@
 
 	<properties>
 		<exec.mainClass>com.github.ravisuthar.Application</exec.mainClass>
-		<micronaut.version>1.2.0</micronaut.version>
+		<micronaut.version>1.2.1</micronaut.version>
 		<jdk.version>1.8</jdk.version>
 		<maven.compiler.target>${jdk.version}</maven.compiler.target>
 		<maven.compiler.source>${jdk.version}</maven.compiler.source>
