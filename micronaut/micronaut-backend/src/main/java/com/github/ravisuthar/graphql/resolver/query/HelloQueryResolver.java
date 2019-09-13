@@ -1,11 +1,11 @@
-package com.github.ravisuthar.graphql.resolver;
+package com.github.ravisuthar.graphql.resolver.query;
 import javax.inject.Singleton;
 
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
 
 
 @Singleton
-public class HelloResolver implements GraphQLQueryResolver {
+public class HelloQueryResolver implements GraphQLQueryResolver {
 
     public String getHello(String evn) {
         String name = evn;

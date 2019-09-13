@@ -1,13 +1,18 @@
  schema {
     query: Query
+    mutation: Mutation
  }
 
 type Query {
     hello(name: String): String!
-    user: user
+    user: User
 }
 
-type user{
+type Mutation{
+	addUser(user: String!): Boolean
+}
+
+type User{
 	id: String
 	name: String
 	email: String

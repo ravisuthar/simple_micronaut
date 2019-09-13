@@ -9,27 +9,31 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import com.coxautodev.graphql.tools.SchemaParser;
-import com.github.ravisuthar.graphql.resolver.HelloResolver;
-import com.github.ravisuthar.graphql.resolver.UserResolver;
+import com.github.ravisuthar.graphql.resolver.mutation.AddUserMutationResolver;
+import com.github.ravisuthar.graphql.resolver.query.HelloQueryResolver;
+import com.github.ravisuthar.graphql.resolver.query.UserQueryResolver;
 
 @Factory
 public class GraphQLFactory {
 
 	@Inject
-	private HelloResolver helloDataFetcher;
+	private HelloQueryResolver helloDataQueryResolver;
 
 	@Inject
-	private UserResolver userDataFetcher;
+	private UserQueryResolver userQueryResolver;
 
+	@Inject
+	private AddUserMutationResolver addUserMutationResolver;
+	
 	@Bean
 	@Singleton
 	public GraphQL graphQL() {
 		// https://www.graphql-java-kickstart.com/tools/schema-definition/
-
 		GraphQLSchema graphQLSchema = SchemaParser.newParser()
 				.file("schema.graphqls")
-				.resolvers(this.userDataFetcher, 
-						this.helloDataFetcher)
+				.resolvers(this.userQueryResolver, 
+						this.helloDataQueryResolver,
+						this.addUserMutationResolver)
 				.build()
 				.makeExecutableSchema();
 		return GraphQL.newGraphQL(graphQLSchema).build();
