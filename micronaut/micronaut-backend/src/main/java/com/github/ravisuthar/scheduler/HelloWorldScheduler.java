@@ -1,16 +1,20 @@
-package com.github.ravisuthar.job;
+package com.github.ravisuthar.scheduler;
 
+import io.micronaut.context.annotation.Requires;
 import io.micronaut.scheduling.annotation.Scheduled;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import javax.inject.Singleton;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.inject.Singleton;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+@Requires(property="${scheduler.enabled}",value="true")
 @Singleton 
-public class HelloWorldJob {
-    private static final Logger LOG = LoggerFactory.getLogger(HelloWorldJob.class); 
+public class HelloWorldScheduler {
+    private static final Logger LOG = LoggerFactory.getLogger(HelloWorldScheduler.class); 
 
     //@Scheduled(fixedDelay = "10s") 
     void executeEveryTen() {
@@ -23,8 +27,8 @@ public class HelloWorldJob {
     }
     
 
-   // @Scheduled(cron = "0 30 4 1/1 * ?") 
+    @Scheduled(cron = "${scheduler.cron}") 
     void execute() {
-    	LOG.info("john.doe@micronaut.example", "Test Message"); 
+    	LOG.info("ravi.suthar@micronaut.example", "Test Message"); 
     }
 }

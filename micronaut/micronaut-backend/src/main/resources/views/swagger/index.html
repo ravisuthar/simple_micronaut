@@ -3,10 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Swagger-ui</title>
-
     <link rel="icon" type="image/png" href="https://unpkg.com/swagger-ui-dist@{{version}}/favicon-32x32.png">
     <link rel="stylesheet" type="text/css" href="https://unpkg.com/swagger-ui-dist@{{version}}/swagger-ui.css">
-
     <script src="https://unpkg.com/swagger-ui-dist@{{version}}/swagger-ui-standalone-preset.js"></script>
     <script src="https://unpkg.com/swagger-ui-dist@{{version}}/swagger-ui-bundle.js"></script>
 </head>
@@ -15,11 +13,11 @@
     <script>
         window.onload = function() {
             var ui = SwaggerUIBundle({
-                urls: [{{#each urls}}
+                urls: [
                     {
-                        name: "{{name}}",
-                        url: "{{url}}"
-                    }{{#unless @last}},{{/unless}}{{/each}}
+                        name: "API DOC",
+                        url: "/swagger/swagger-server-0.1.yml"
+                    }
                 ],
                 dom_id: '#swagger-ui',
                 deepLinking: {{deepLinking}},

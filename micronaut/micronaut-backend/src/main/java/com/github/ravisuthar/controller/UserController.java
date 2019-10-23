@@ -26,8 +26,6 @@ import org.slf4j.LoggerFactory;
 
 import com.github.ravisuthar.model.User;
 
-
-
 @Controller("/user")
 @Validated
 public class UserController {

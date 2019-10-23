@@ -4,7 +4,6 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import com.coxautodev.graphql.tools.GraphQLMutationResolver;
-import com.github.ravisuthar.model.User;
 import com.github.ravisuthar.service.UserService;
 
 @Singleton

@@ -8,7 +8,6 @@ import javax.inject.Singleton;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.github.ravisuthar.controller.UserController;
 import com.github.ravisuthar.model.User;
 
 @Singleton

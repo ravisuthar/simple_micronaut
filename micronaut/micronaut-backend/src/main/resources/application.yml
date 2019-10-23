@@ -1,16 +1,3 @@
-application:
-    api:
-        swagger:
-            path: /api-docs/swagger
-            version: 3.19.4
-            layout: StandaloneLayout
-            deepLinking: true
-            urls:
-            - name: swagger-server
-              url: /api-docs/swagger/swagger-server-0.1.yml
-            #- name: spec2
-            #  url: url2
-
 micronaut:
   application:
     name: myapplication
@@ -23,8 +10,12 @@ micronaut:
   router:
     static-resources:
          swagger:
-         paths: classpath:META-INF/swagger
-         mapping: ${application.api.swagger.path}/**
+          enabled: true
+          mapping: /swagger/**
+          paths: 
+          - classpath:META-INF/swagger
+          - classpath:view/swagger
+         
   metrics:
      enabled: true
      export:
@@ -37,3 +28,8 @@ graphql:
     path: /graphiql
     template-path: classpath:graphiql/index.html
     page-title: GraphiQL
+    
+ 
+scheduler:
+  enabled: true
+  cron: '0 30 4 1/1 * ?'
