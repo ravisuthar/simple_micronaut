@@ -15,7 +15,19 @@ micronaut:
           paths: 
           - classpath:META-INF/swagger
           - classpath:view/swagger
-         
+          
+    versioning:
+          enabled: true
+          default-version: 3
+          parameter:
+              enabled: true 
+              names: 'v,api-version' 
+          header:
+              enabled: true 
+              names: 
+                  - 'X-API-VERSION'
+                  - 'Accept-Version'   
+              
   metrics:
      enabled: true
      export:
