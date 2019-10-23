@@ -39,16 +39,4 @@ public class UserControllerTest {
         Assertions.assertEquals("[{\"id\":\"1\",\"name\":\"ABC\",\"email\":\"abc@abc.abc\"},{\"id\":\"2\",\"name\":\"xyz\",\"email\":\"xyz@xyz.xyz\"}]", response); //) 
     }
     
-    /*@Test
-    public void addUser(){
-    	
-         this.userControllerClient.add(new User()));
-         
-    }*/
-    
-    /*@Test
-    public void testHelloWorldResponse() {
-        Assertions.assertEquals("", userControllerClient.getAll().blockingGet());
-    }
-    */
 }
